@@ -12,7 +12,7 @@ namespace FireSafetyManager.Models
         public int IncidentsTotal { get; set; }
         public bool IsOnDuty { get; set; }
 
-        public virtual ICollection<Employee> Employees { get; set; }
-        public virtual ICollection<Incident> Incidents { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
+        public virtual ICollection<Incident> Incidents { get; set; } = new List<Incident>();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,7 +14,12 @@ namespace FireSafetyManager.Models
         [Required]
         public string LastName { get; set; }
         [Required]
+        [EmailAddress]
+        public string EmailAddress { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateOnly DateOfBirth { get; set; }
+
         [Required]
         [Phone]
         public string PhoneNumber { get; set; }
