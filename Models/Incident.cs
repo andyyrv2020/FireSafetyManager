@@ -7,18 +7,31 @@ namespace FireSafetyManager.Models
     {
         [Key]
         public int Id { get; set; }
+
         [Required]
         [StringLength(100)]
         public string Address { get; set; }
+
         [Required]
+        [Display(Name = "Incident Type")]
         public string Type { get; set; }
+
+        [Display(Name = "Used Water")]
         public int WaterUsed { get; set; }
+
+
         [Required]
+        [Display(Name = "Incident Start")]
         public TimeOnly IncidentStart { get; set; }
+        [Display(Name = "Incident End")]
         public TimeOnly IncidentEnd { get; set; }
 
         public int? VehicleId { get; set; }
         [ForeignKey("VehicleId")]
         public virtual Vehicle? Vehicle { get; set; }
+
+        public int? EmployeeId { get; set; }
+        [ForeignKey("EmployeeId")]
+        public virtual Employee? Employee { get; set; }
     }
 }

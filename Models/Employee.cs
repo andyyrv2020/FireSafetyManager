@@ -10,19 +10,27 @@ namespace FireSafetyManager.Models
         [Key]
         public int Id { get; set; }
         [Required]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Required]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
         [Required]
         [EmailAddress]
+        [Display(Name = "Email Address")]
         public string EmailAddress { get; set; }
 
+        [Display(Name = "Date Of Birth")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateOnly DateOfBirth { get; set; }
 
         [Required]
         [Phone]
+        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
+
+
+        [Display(Name = "Available?")]
         public bool IsOnDuty { get; set; }
 
         public int? VehicleId { get; set; }
