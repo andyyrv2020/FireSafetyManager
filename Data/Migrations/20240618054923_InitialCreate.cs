@@ -18,7 +18,6 @@ namespace FireSafetyManager.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CarModel = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    IncidentsTotal = table.Column<int>(type: "int", nullable: false),
                     IsOnDuty = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -35,8 +34,8 @@ namespace FireSafetyManager.Data.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateOfBirth = table.Column<DateOnly>(type: "date", nullable: false),
+                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsOnDuty = table.Column<bool>(type: "bit", nullable: false),
                     VehicleId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -46,7 +45,8 @@ namespace FireSafetyManager.Data.Migrations
                         name: "FK_Employees_Vehicles_VehicleId",
                         column: x => x.VehicleId,
                         principalTable: "Vehicles",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -58,24 +58,37 @@ namespace FireSafetyManager.Data.Migrations
                     Address = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     WaterUsed = table.Column<int>(type: "int", nullable: false),
-                    IncidentStart = table.Column<TimeOnly>(type: "time", nullable: false),
-                    IncidentEnd = table.Column<TimeOnly>(type: "time", nullable: false),
-                    VehicleId = table.Column<int>(type: "int", nullable: true)
+                    IncidentStart = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IncidentEnd = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    VehicleId = table.Column<int>(type: "int", nullable: true),
+                    EmployeeId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Incidents", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Incidents_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employees",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
                         name: "FK_Incidents_Vehicles_VehicleId",
                         column: x => x.VehicleId,
                         principalTable: "Vehicles",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_VehicleId",
                 table: "Employees",
                 column: "VehicleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Incidents_EmployeeId",
+                table: "Incidents",
+                column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Incidents_VehicleId",
@@ -87,10 +100,10 @@ namespace FireSafetyManager.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Employees");
+                name: "Incidents");
 
             migrationBuilder.DropTable(
-                name: "Incidents");
+                name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "Vehicles");

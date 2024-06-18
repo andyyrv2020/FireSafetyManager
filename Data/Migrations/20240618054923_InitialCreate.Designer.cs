@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FireSafetyManager.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240617151856_UpdateDbIncident")]
-    partial class UpdateDbIncident
+    [Migration("20240618054923_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,9 +43,6 @@ namespace FireSafetyManager.Data.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsOnDuty")
-                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -81,11 +78,11 @@ namespace FireSafetyManager.Data.Migrations
                     b.Property<int?>("EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<TimeOnly>("IncidentEnd")
-                        .HasColumnType("time");
+                    b.Property<DateTime>("IncidentEnd")
+                        .HasColumnType("datetime2");
 
-                    b.Property<TimeOnly>("IncidentStart")
-                        .HasColumnType("time");
+                    b.Property<DateTime>("IncidentStart")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -118,9 +115,6 @@ namespace FireSafetyManager.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("IncidentsTotal")
-                        .HasColumnType("int");
 
                     b.Property<bool>("IsOnDuty")
                         .HasColumnType("bit");
@@ -336,7 +330,8 @@ namespace FireSafetyManager.Data.Migrations
                 {
                     b.HasOne("FireSafetyManager.Models.Vehicle", "Vehicle")
                         .WithMany("Employees")
-                        .HasForeignKey("VehicleId");
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Vehicle");
                 });
@@ -344,12 +339,14 @@ namespace FireSafetyManager.Data.Migrations
             modelBuilder.Entity("FireSafetyManager.Models.Incident", b =>
                 {
                     b.HasOne("FireSafetyManager.Models.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId");
+                        .WithMany("Incidents")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("FireSafetyManager.Models.Vehicle", "Vehicle")
                         .WithMany("Incidents")
-                        .HasForeignKey("VehicleId");
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Employee");
 
@@ -405,6 +402,11 @@ namespace FireSafetyManager.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("FireSafetyManager.Models.Employee", b =>
+                {
+                    b.Navigation("Incidents");
                 });
 
             modelBuilder.Entity("FireSafetyManager.Models.Vehicle", b =>
