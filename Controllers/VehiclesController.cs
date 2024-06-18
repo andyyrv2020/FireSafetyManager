@@ -54,7 +54,7 @@ namespace FireSafetyManager.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CarModel,IsOnDuty")] Vehicle vehicle)
+        public async Task<IActionResult> Create([Bind("Id,CarModel,IsMonday,IsTuesday,IsWednesday,IsThursday,IsFriday,IsSaturday,isSunday")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace FireSafetyManager.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CarModel,IsOnDuty")] Vehicle vehicle)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CarModel,IsMonday,IsTuesday,IsWednesday,IsThursday,IsFriday,IsSaturday,isSunday")] Vehicle vehicle)
         {
             if (id != vehicle.Id)
             {
