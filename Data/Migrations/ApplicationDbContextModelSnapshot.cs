@@ -88,8 +88,8 @@ namespace FireSafetyManager.Data.Migrations
                     b.Property<int?>("VehicleId")
                         .HasColumnType("int");
 
-                    b.Property<int>("WaterUsed")
-                        .HasColumnType("int");
+                    b.Property<double>("WaterUsed")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 

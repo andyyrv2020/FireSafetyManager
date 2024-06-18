@@ -17,7 +17,7 @@ namespace FireSafetyManager.Models
         public string Type { get; set; }
 
         [Display(Name = "Used Water (L)")]
-        public int WaterUsed { get; set; }
+        public double WaterUsed { get; set; }
 
 
         [Required]

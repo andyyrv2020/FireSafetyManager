@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FireSafetyManager.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialyCreated : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -57,7 +57,7 @@ namespace FireSafetyManager.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Address = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    WaterUsed = table.Column<int>(type: "int", nullable: false),
+                    WaterUsed = table.Column<double>(type: "float", nullable: false),
                     IncidentStart = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IncidentEnd = table.Column<DateTime>(type: "datetime2", nullable: false),
                     VehicleId = table.Column<int>(type: "int", nullable: true),

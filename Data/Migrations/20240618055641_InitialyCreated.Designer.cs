@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FireSafetyManager.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240618054923_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240618055641_InitialyCreated")]
+    partial class InitialyCreated
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -91,8 +91,8 @@ namespace FireSafetyManager.Data.Migrations
                     b.Property<int?>("VehicleId")
                         .HasColumnType("int");
 
-                    b.Property<int>("WaterUsed")
-                        .HasColumnType("int");
+                    b.Property<double>("WaterUsed")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
