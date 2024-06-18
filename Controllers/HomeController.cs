@@ -1,5 +1,8 @@
-using FireSafetyManager.Data;
+﻿using FireSafetyManager.Data;
 using FireSafetyManager.Models;
+using System;
+using System.Linq;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -16,8 +19,22 @@ namespace FireSafetyManager.Controllers
 
         public IActionResult Index()
         {
+            var today = DateTime.Today.DayOfWeek;
+            var vehiclesOnDuty = _context.Vehicles.Where(v =>
+                (today == DayOfWeek.Monday && v.IsMonday) ||
+                (today == DayOfWeek.Tuesday && v.IsTuesday) ||
+                (today == DayOfWeek.Wednesday && v.IsWednesday) ||
+                (today == DayOfWeek.Thursday && v.IsThursday) ||
+                (today == DayOfWeek.Friday && v.IsFriday) ||
+                (today == DayOfWeek.Saturday && v.IsSaturday) ||
+                (today == DayOfWeek.Sunday && v.isSunday)
+            ).ToList();
+
+            ViewBag.VehiclesOnDuty = vehiclesOnDuty;
+
             return View();
         }
+
 
         public IActionResult Privacy()
         {

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FireSafetyManager.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialyCreated : Migration
+    public partial class InitCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +18,13 @@ namespace FireSafetyManager.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CarModel = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    IsOnDuty = table.Column<bool>(type: "bit", nullable: false)
+                    IsMonday = table.Column<bool>(type: "bit", nullable: false),
+                    IsTuesday = table.Column<bool>(type: "bit", nullable: false),
+                    IsWednesday = table.Column<bool>(type: "bit", nullable: false),
+                    IsThursday = table.Column<bool>(type: "bit", nullable: false),
+                    IsFriday = table.Column<bool>(type: "bit", nullable: false),
+                    IsSaturday = table.Column<bool>(type: "bit", nullable: false),
+                    isSunday = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

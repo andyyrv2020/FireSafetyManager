@@ -113,7 +113,25 @@ namespace FireSafetyManager.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<bool>("IsOnDuty")
+                    b.Property<bool>("IsFriday")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsMonday")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSaturday")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsThursday")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsTuesday")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsWednesday")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isSunday")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
